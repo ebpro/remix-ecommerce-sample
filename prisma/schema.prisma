@@ -36,3 +36,26 @@ model Note {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 }
+
+model Product {
+  id          Int      @id @default(autoincrement()) // Unique identifier for the product, auto-incremented
+  name        String                                // Name of the product
+  price       Float                                 // Price of the product
+  description String?                               // Optional description of the product
+  createdAt   DateTime @default(now())              // Timestamp when the product was created, defaults to the current time
+}
+
+model Order {
+  id        Int      @id @default(autoincrement()) // Unique identifier for the order, auto-incremented
+  total     Float                                // Total amount for the order
+  createdAt DateTime @default(now())             // Timestamp when the order was created, defaults to the current time
+  userId    Int                                  // Foreign key referencing the Customer who placed the order
+  user      Customer @relation(fields: [userId], references: [id]) // Relation to the Customer model
+}
+
+model Customer {
+  id     Int     @id @default(autoincrement()) // Unique identifier for the customer, auto-incremented
+  name   String                              // Name of the customer
+  email  String  @unique                     // Unique email of the customer
+  orders Order[]                             // List of orders placed by the customer
+}

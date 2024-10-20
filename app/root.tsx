@@ -2,7 +2,7 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  Links,
+  Links, Link,
   LiveReload,
   Meta,
   Outlet,
@@ -32,7 +32,7 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <Outlet /> 
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
